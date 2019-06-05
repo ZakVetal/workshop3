@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">UserName</th>
+            <th scope="col">Email</th>
+            <th scope="col">Birthday</th>
+            <th scope="col">CreditCard</th>
+        </tr>
+        </thead>
+        <tr>
+            {% for user in users %}
+            <td>{{user.user_name}}</td>
+            <td>{{user.user_email}}</td>
+            <td>{{user.user_birthday}}</td>
+            <td>{{user.credit_card}}</td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

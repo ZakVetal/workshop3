@@ -1,0 +1,5 @@
+username = 'SYSTEM'
+password = 'Vladik99'
+host = 'localhost'
+port = '1521'
+service = 'XE'
