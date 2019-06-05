@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <body>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Value</th>
+                  <th>Variable name</th>
+                <th>Test name</th>
+
+            </tr>
+            {% for res in result %}
+            <tr>
+                <td>{{ res.data }}</td>
+                <td>{{ res.value }}</td>
+                <td>{{ res.variable_name_fk }}</td>
+                <td>{{ res.test_fk }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
