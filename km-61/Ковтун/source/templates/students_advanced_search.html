@@ -1,0 +1,48 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container">
+    <form method="post">
+        {{form.hidden_tag()}}
+
+        <div class="form-row">
+            <div class="col">
+                {{ form.Firstname(class_="form-control") }}
+            </div>
+            <div class="col">
+                {{form.Lastname(class_="form-control") }}
+            </div>
+            <div class="col">
+                {{form.Group(class_="form-control")}}
+            </div>
+            <div>
+                {{form.Submit(class_="btn btn-primary")}}
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container">
+    <table class="table ">
+        <thead>
+        <tr>
+            <th scope="col">Fullname</th>
+            <th scope="col">SSN</th>
+            <th scope="col">Birthdate</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for student in students: %}
+        <tr>
+            <td>{{student[1]}} {{student[3]}}</td>
+            <td>{{student[4]}}</td>
+            {% if student[5] != None: %}
+                <td>{{student[5]}}</td>
+            {% else: %}
+                <td>-</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

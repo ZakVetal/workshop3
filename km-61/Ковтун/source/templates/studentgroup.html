@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<form method="post" >
+    {{form.hidden_tag()}}
+
+    <div class="form-group">
+        {{form.Student.label}}
+        {{form.Student(class_="form-control")}}
+    </div>
+    <div class="form-group">
+        {{form.Group.label}}
+        {{form.Group(class_="form-control")}}
+    </div>
+    <div class="form-group">
+        {{form.StartDate.label}}
+        {{form.StartDate(class_="form-control")}}
+    </div>
+    <div class="form-group">
+        {{form.EndDate.label}}
+        {{form.EndDate(class_="form-control")}}
+    </div>
+    {{form.Submit(class_="btn btn-primary")}}
+</form>
+{% endblock %}
