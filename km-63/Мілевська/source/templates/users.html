@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+
+{% block title %} Users {% endblock title %}
+{% block extra_script %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/user.js') }}"></script>
+{% endblock extra_script %}
+{% block content %}
+
+<div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-8"><h2><b>Users</b></h2></div>
+                    <div class="col-sm-4">
+                        <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>username</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td data-model-name="user_id" hidden>{{ user.user_id }}</td>
+                        <td data-model-name="user_email">{{ user.user_email }}</td>
+                        <td data-model-name="user_name">{{ user.user_name }}</td>
+                        <td data-model-name="user_first_name">{{ user.user_first_name }}</td>
+                        <td data-model-name="user_last_name">{{ user.user_last_name }}</td>
+                        <td>
+                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a class="delete" id="{{ user.user_id }}" title="Delete" data-toggle="tooltip"><i  class="material-icons">&#xE872;</i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock content %}

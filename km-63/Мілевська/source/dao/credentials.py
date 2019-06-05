@@ -1,0 +1,5 @@
+username = 'system'
+password = '490pdapiV'
+host = 'localhost'
+port = '1521'
+service = 'xe'
