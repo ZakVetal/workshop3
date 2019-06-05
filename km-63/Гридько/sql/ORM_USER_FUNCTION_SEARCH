@@ -1,0 +1,62 @@
+create or replace PACKAGE orm_user_Function_search IS
+
+
+    TYPE variable_data IS RECORD(
+        function_name orm_function.function_name%TYPE,
+        variable_count INTEGER
+    );
+
+
+    TYPE variableData IS TABLE OF variable_data;
+
+    FUNCTION GetVariable (function_name orm_function.function_name%TYPE default null)
+        RETURN variableData
+        PIPELINED;
+
+END orm_user_Function_search;
+
+
+create or replace PACKAGE BODY orm_user_Function_search IS
+
+    FUNCTION GetVariable (function_name orm_function.function_name%TYPE default null)
+    RETURN variableData
+    PIPELINED
+    IS
+
+        TYPE var_cursor_type IS REF CURSOR;
+        var_cursor  var_cursor_type;
+
+        cursor_data variable_data;
+        query_str varchar2(1000);
+
+    begin
+
+        query_str :='select orm_function.function_name, count(orm_variable.VARIABLE_NAME)
+                        from orm_user inner join orm_function 
+                        on orm_user.user_name = orm_function.user_name_fk
+                        inner join orm_variable 
+                        on orm_function.function_name = orm_variable.function_name_fk ';
+
+        -- optional part where
+            if function_name is not null then
+             query_str:= query_str||' where trim(orm_function.function_name) = trim('''||function_name||''') ';
+            end if;
+        -- end optional part
+
+        query_str := query_str||' group by orm_function.function_name';
+
+
+
+        OPEN var_cursor FOR query_str;
+        LOOP
+            FETCH var_cursor into cursor_data;
+            exit when (var_cursor %NOTFOUND);
+
+            PIPE ROW (cursor_data);
+
+        END LOOP;
+
+
+    END GetVariable;
+
+END orm_user_Function_search;
