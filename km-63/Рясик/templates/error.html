@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+        table
+        {
+            border: 1px solid black;
+        }
+
+        h1, h2, p
+        {
+            display: flex;
+            justify-content: center;
+        }
+
+        .error{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+    <title>Error</title>
+</head>
+<body>
+    <h1>404 - Page Not Found</h1>
+    <h2>Not correct action value: {{ action_value }}</h2>
+
+    <div class="error">
+        <p>Available only: </p>
+
+        <code>
+            {% for key in available %}
+                {{ key }}
+            {% endfor %}
+        </code>
+    </div>
+
+
+</body>
+</html>
