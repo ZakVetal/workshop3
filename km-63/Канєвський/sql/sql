@@ -1,0 +1,63 @@
+create or replace PACKAGE orm_count IS
+
+
+    TYPE count_data IS RECORD(
+        group_name orm_groups.group_name%TYPE,
+        teacher_count INTEGER
+    );
+
+
+    TYPE cdata IS TABLE OF count_data;
+
+    FUNCTION GetCountData (group_name orm_groups.group_name%TYPE)
+        RETURN cdata
+        PIPELINED;
+
+END orm_count;
+
+
+create or replace PACKAGE BODY orm_count IS
+
+
+    FUNCTION GetCountData (group_name orm_groups.group_name%TYPE)
+        RETURN cdata
+        PIPELINED
+    IS
+
+        TYPE count_cursor_type IS REF CURSOR;
+        count_cursor  count_cursor_type;
+
+        cursor_data count_data;
+        query_str varchar2(1000);
+
+    begin
+
+        query_str :=' select count(distinct orm_teachers.teacher_name),orm_groups.group_name
+                        from ORM_SCHEDULES inner join ORM_TEACHERS
+                        on ORM_SCHEDULES.TEACHER_ID = ORM_TEACHERS.TEACHER_ID
+                        inner join ORM_GROUPS
+                        on ORM_SCHEDULES.GROUP_NAME = ORM_GROUPS.GROUP_NAME ';
+
+        -- optional part where
+            if group_name is not null then
+             query_str:= query_str||' where trim(orm_groups.group_name) = trim('''||group_name||''') ';
+            end if;
+        -- end optional part
+
+        query_str := query_str||' GROUP BY orm_groups.group_name';
+
+
+
+        OPEN count_cursor FOR query_str;
+        LOOP
+            FETCH count_cursor into cursor_data;
+            exit when (count_cursor %NOTFOUND);
+
+            PIPE ROW (cursor_data);
+
+        END LOOP;
+
+
+    END GetCountData;
+
+END orm_count;

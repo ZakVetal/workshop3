@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+
+  <ul class="navbar-nav">
+    <li class="nav-item"><a class="nav-link" href="/all_group">Groups</a></li>
+    <li class="nav-item"><a class="nav-link" href="/all_teacher">Teachers</a></li>
+    <li class="nav-item"><a class="nav-link" href="/all_schedule">Schedule</a></li>
+    <li class="nav-item"><a class="nav-link" href="/search">Search</a></li>
+    <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+  </ul>
+        <table>
+            <tr>
+                <th>Data</th>
+                <th>Group name</th>
+                <th>Teacher id</th>
+
+             </tr>
+            {% for item in result %}
+            <tr>
+                <td>{{ item.schedule_data }}</td>
+                <td>{{ item.group_name }}</td>
+                <td>{{ item.teacher_id }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
