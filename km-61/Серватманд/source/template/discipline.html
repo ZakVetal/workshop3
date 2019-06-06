@@ -1,0 +1,41 @@
+
+{% extends "index.html" %}
+
+{% block content %}
+
+
+
+ <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Studybook</th>
+                <th scope="col">Skill name</th>
+            </tr>
+        </thead>
+        <tr>
+        {% for user in users %}
+
+            <td> {{user.user_name }} </td>
+            <td> {{user.user_id}} </td>
+            <td>
+                <ul>
+                    {% for discipline in user.orm_discipline %}
+                    <li>{{discipline.discipline_name}}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </td>
+
+
+
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+ </div>
+
+
+{% endblock %}
