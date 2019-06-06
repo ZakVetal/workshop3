@@ -1,0 +1,12 @@
+create table student(number_of_daybook varchar(20),student_name varchar(13),birth_date date,contract_is boolean);
+alter table student add constraint pk_student primary  key(number_of_daybook);
+
+create table modules(module_name varchar(20),teacher varchar(15));
+alter table modules add constraint pk_student primary  key(module_name);
+
+create table learning( module_name varchar(20),number_of_daybook varchar(20),date_reporting date, point number);
+alter table learning add constraint pk_student primary  key(number_of_daybook,module_name);
+alter table learning add constraint
+fk1 foreighn key referenses modules(module_name);
+alter table learning add constraint
+fk2 foreighn key referenses modules(number_of_daybook);
