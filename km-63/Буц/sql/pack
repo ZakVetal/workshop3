@@ -1,0 +1,119 @@
+create or replace package my_pack is
+  procedure create_student(
+
+                            a in student.number_of_daybook%TYPE,
+                            b in student.student_name%TYPE,
+                            c in student.birth_date%TYPE,
+                            d in student.contract_is%TYPE,
+                            status out varchar2
+
+
+                        );
+     procedure update_student(
+
+                            a in student.number_of_daybook%TYPE,
+                            b in student.student_name%TYPE,
+                            c in student.birth_date%TYPE,
+                            d in student.contract_is%TYPE,
+                            status out varchar2
+
+                        );
+     procedure drop_student(
+
+                            a in student.number_of_daybook%TYPE,
+                            status out varchar2
+
+
+                        );
+      procedure new_Module(
+
+                            a in modules.module_name%TYPE,
+                            b in modules.teacher%TYPE,
+                            status out varchar2
+
+
+                        );
+     procedure update_Module(
+
+                            a in modules.module_name%TYPE,
+                            b in modules.teacher%TYPE,
+                            status out varchar2
+
+                        );
+     procedure drop_Module(
+
+                            a in modules.module_name%TYPE,
+                            status out varchar2
+
+
+                        );
+      procedure create_learning(
+
+                            a in learning.user_phone%TYPE,
+                            b in learning.channel_url%TYPE,
+                            c in learning.subscription_date%TYPE,
+                            d in learning.
+                            status out varchar2
+
+
+                        );
+
+     procedure drop_learning(
+                            a in learning.module_name%TYPE,
+                            b in learning.number_of_daybook%TYPE,
+                            status out varchar2
+
+                        );
+
+        TYPE mod IS RECORD(
+        m learning.module_name%TYPE,
+    );
+
+
+    TYPE tblsour IS TABLE OF mod;
+
+    FUNCTION GetMod (m1 INTEGER default null,m2 INTEGER default null, x ,y )
+        RETURN tblsour
+        PIPELINED;
+
+
+            end my_pack;
+
+
+#####BODY##
+create or replace package body my_pack is
+
+...
+   FUNCTION GetMod (min INTEGER default null,max INTEGER default null,a learning.daybook%TYPE ,b learning.module_name%TYPE )
+        begin
+
+        our_query:='select module_name  from learning where our_query = trim('''||a||''') and module_name= trim('''||b||''')';
+
+            if min is not null and max is not null then
+            our_query:= our_query||'and point between  trim('''||min||''') and trim('''||max||''')';
+
+            
+            end if;
+
+        query_str := query_str||' group by ORM_USER_SKILL.skill_name';
+
+
+
+        OPEN mod FOR query_str;
+        LOOP
+            FETCH mod into cursor_data;
+            exit when (mod %NOTFOUND);
+
+            PIPE ROW (mod);
+
+        END LOOP;
+
+
+
+
+
+            end my_pack;
+
+
+
+
