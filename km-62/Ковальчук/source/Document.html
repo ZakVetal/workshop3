@@ -1,0 +1,35 @@
+
+
+{% extends "index.html" %}
+
+{% block content %}
+
+
+
+ <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Document name</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for Document in Documents %}
+            <tr >
+                <td> {{Document.patch_file}} </td>
+                <td>
+                    <button type="button" class="btn btn-warning" name="btn_edit_user" data-user_id="{{Document.patch_file}}">Edit</button>
+                    <button type="button" class="btn btn-danger" name="btn_delete_user" data-user_id="{{Document.patch_file}}">Delete</button>
+                </td>
+            </tr>
+        {% endfor %}
+            <tr>
+                <td> <button type="button" class="btn btn-success" name="btn_new_Document">New Document</button> </td>
+            </tr>
+        </tbody>
+    </table>
+ </div>
+
+    <!--<script src="{{ url_for('static', filename='js/Document.js') }}"></script>-->
+
+{% endblock %}

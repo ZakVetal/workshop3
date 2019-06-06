@@ -1,0 +1,41 @@
+
+{% extends "index.html" %}
+
+{% block content %}
+
+
+
+ <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Studybook</th>
+                <th scope="col">Document name</th>
+            </tr>
+        </thead>
+        <tr>
+        {% for user in users %}
+
+            <td> {{user.email }} </td>
+            <td> {{user.user_studybook}} </td>
+            <td>
+                <ul>
+                    {% for Document in user.orm_Documents %}
+                    <li>{{Document.patch_fail}}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </td>
+
+
+
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+ </div>
+
+
+{% endblock %}
