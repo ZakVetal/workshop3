@@ -1,0 +1,66 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="col-md-6 mx-auto">
+
+    <!-- form card login -->
+    <div class="card rounded-0">
+
+        <div class="card-header">
+            <h3 class="mb-0">Form for learning</h3>
+        </div>
+        <div class="card-body">
+
+            <form class="form"  action = "{{action}}" method = post >
+                        {{ all_forms.hidden_tag() }}
+
+
+    <div class="form-group">
+        <h1>NEW</h1>
+        {{ all_forms.module_name_.label }}
+        {{ all_forms.module_name_(class_="form-control") }}
+    </div>
+
+    <div class="form-group">
+        {{ all_forms.student_daybook_.label }}
+        {{ all_forms.student_daybook_(class_="form-control") }}
+    </div>
+
+    <div class="form-group">
+        {{ all_forms.reporting.label }}
+        {{ all_forms.reporting(class_="form-control") }}
+    </div>
+
+    <div class="form-group">
+        {{ all_forms.point.label }}
+        {{ all_forms.point(class_="form-control") }}
+    </div>
+
+
+                        {{ all_forms.submit(class_="btn btn-success") }}
+            </form>
+
+            <form class="form"  action = "{{action}}" method = post >
+                        {{ all_forms.hidden_tag() }}
+
+
+    <div class="form-group">
+        <h1>DELETE</h1>
+        {{ all_forms.module_name_.label }}
+        {{ all_forms.module_name_(class_="form-control") }}
+    </div>
+                   <div class="form-group">
+        {{ all_forms.student_daybook_.label }}
+        {{ all_forms.student_daybook_(class_="form-control") }}
+    </div>
+
+                {{ all_forms.submit(class_="btn btn-success") }}
+            </form>
+
+        </div>
+        <!--/card-block-->
+    </div>
+    <!-- /form card login -->
+
+</div>
+{% endblock %}
