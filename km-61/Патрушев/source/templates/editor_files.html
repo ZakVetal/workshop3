@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">user name</th>
+            <th scope="col">user login</th>
+            <th scope="col">file name</th>
+            <th scope="col">file type</th>
+            <th scope="col">file context</th>
+            <th scope="col">file date</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+        {% for edit_file in user.orm_editor %}
+        <tr>
+            <td> {{user.user_name }}</td>
+            <td> {{user.user_login}}</td>
+            <td> {{edit_file.file_name}}</td>
+            <td> {{edit_file.file_type}}</td>
+            <td> {{edit_file.file_context}}</td>
+            <td> {{edit_file.file_date}}</td>
+            <td>
+                <a href="/edit_editor_file?file_id={{edit_file.file_id}}&user_id={{user.user_id}}" title="edit button">
+                    <button type="button" class="btn btn-warning" name="btn_edit_user">Edit</button>
+                </a>
+                <a href="/delete_editor_file?file_id={{edit_file.file_id}}&user_id={{user.user_id}}"
+                   title="delete button">
+                    <button type="button" class="btn btn-danger" name="btn_delete_user">Delete</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+        <tr>
+            <td>
+                <a href="/new_editor_file" title="new editor file button">
+                    <button type="button" class="btn btn-success" name="btn_new_skill">New editor file</button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}
