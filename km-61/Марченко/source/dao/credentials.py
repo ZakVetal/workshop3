@@ -1,0 +1,5 @@
+username = 'alexmarch'
+password = 'pass123'
+host = 'localhost'
+port = '1521'
+service = 'XE'
