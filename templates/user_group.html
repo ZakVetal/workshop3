@@ -1,0 +1,41 @@
+
+
+
+{% extends "index.html" %}
+
+{% block content %}
+
+ <div class="table-responsive">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Group</th>
+                <th scope="col">User</th>
+            </tr>
+        </thead>
+        <tr>
+        {% for group in groups %}
+
+            <td> {{group.group_name }} </td>
+            <td> {{group.user_studybook}} </td>
+            <td>
+                <ul>
+                    {% for user in group.orm_users %}
+                    <li>{{user.user_name}}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+ </div>
+
+
+
+
+
+{% endblock %}
