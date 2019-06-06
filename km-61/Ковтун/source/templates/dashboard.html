@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+<div class="row">
+    <div class="col-md-6">
+        <div class="d-flex justify-content-center">
+            <h4>Students quantity by groups</h4>
+        </div>
+        <div class="chart" id="students_quantity_by_groups_graph">
+            <script>
+                var group_division_data_plot = {{ group_division_data | safe }};
+                Plotly.plot('students_quantity_by_groups_graph', group_division_data_plot, {});
+            </script>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="d-flex justify-content-center">
+            <h4>Students by names percentage </h4>
+        </div>
+        <div class="chart" id="students_quantity_by_names_graph">
+            <script>
+                var names_division_data_plot = {{ names_division_data | safe }};
+                Plotly.plot('students_quantity_by_names_graph', names_division_data_plot, {});
+            </script>
+        </div>
+    </div>
+</div>
+{% endblock %}

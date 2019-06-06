@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<table class="table ">
+    <thead>
+        <tr>
+            <th scope="col">Student</th>
+            <th scope="col">Group</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+     {% for studentgroup in studentgroups: %}
+        <tr>
+            <td>{{studentgroup.Students.Firstname}} {{studentgroup.Students.Lastname}}</td>
+            <td>{{studentgroup.Groups.Title}}</td>
+            <td>{{studentgroup.StartDate}}</td>
+            {% if studentgroup.EndDate != None: %}
+                <td>{{studentgroup.EndDate}}</td>
+            {% else: %}
+                <td>-</td>
+            {% endif %}
+            <td class="d-flex justify-content-end">
+                <a href="{{url_for('student_group', uuid=studentgroup.Id)}}" class="btn btn-success edit-button">Edit</a>
+                <form class="d-flex" action="{{url_for('delete_student_group', uuid=studentgroup.Id)}}" method="post">
+                    <input type="submit" class="btn btn-danger" value="Remove" />
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<form class="d-flex">
+    <a href="{{url_for('new_student_group')}}" class="btn btn-primary edit-button">Add connection</a>
+</form>
+{% endblock %}
