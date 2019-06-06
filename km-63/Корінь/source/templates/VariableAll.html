@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+    <body>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+
+
+            </tr>
+            {% for res in result %}
+            <tr>
+                <td>{{ res.variable_name }}</td>
+                <td>{{ res.variable_type }}</td>
+
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

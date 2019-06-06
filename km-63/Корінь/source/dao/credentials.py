@@ -1,0 +1,5 @@
+username = 'JOSEPH'
+password = 'JOSEPH1111'
+host = 'joseph'
+port='1521'
+service = 'xe'

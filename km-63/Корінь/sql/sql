@@ -1,0 +1,62 @@
+create or replace PACKAGE orm_test_count IS
+
+
+    TYPE test_data IS RECORD(
+        variable_name orm_variable.variable_name%TYPE,
+        test_count INTEGER
+    );
+
+
+    TYPE testData IS TABLE OF test_data;
+
+    FUNCTION GetTestCount (variable_name orm_variable.variable_name%TYPE default null)
+        RETURN testData
+        PIPELINED;
+
+END orm_test_count;
+
+create or replace PACKAGE BODY orm_test_count IS
+
+    FUNCTION GetTestCount (variable_name orm_variable.variable_name%TYPE default null)
+        RETURN testData
+        PIPELINED
+    IS
+
+        TYPE test_cursor_type IS REF CURSOR;
+        test_cursor  test_cursor_type;
+
+        cursor_data test_data;
+        query_str varchar2(1000);
+
+    begin
+
+        query_str :='select  orm_variable.variable_name,count(orm_test.test_name)
+                        from  orm_variable
+                        inner join orm_data
+                        on orm_variable.variable_name = orm_data.variable_name_fk
+                        inner join orm_test
+                        on orm_data.test_fk = orm_test.test_name';
+
+        -- optional part where
+            if variable_name is not null then
+             query_str:= query_str||' where trim(orm_variable.variable_name) = trim('''||variable_name||''') ';
+            end if;
+        -- end optional part
+
+        query_str := query_str||' group by orm_variable.variable_name';
+
+
+
+        OPEN test_cursor FOR query_str;
+        LOOP
+            FETCH test_cursor into cursor_data;
+            exit when (test_cursor %NOTFOUND);
+
+            PIPE ROW (cursor_data);
+
+        END LOOP;
+
+
+    END GetTestCount;
+
+END orm_test_count;
