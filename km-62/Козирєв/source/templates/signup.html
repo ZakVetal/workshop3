@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO-LIST 9000</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+    <style>
+        div.login-form {
+            margin: auto;
+            top: 50%;
+            width: 250px;
+            height: 250px;
+        }
+    </style>
+
+</head>
+<body>
+    <h1 style="text-align: center;">Welcome, new user!</h1>
+
+    <br/>
+    <br/>
+
+    <form action = ""  method = "post" class="needs-validation" novalidate>
+    <div class = "login-form">
+      <div class="form-group">
+
+        {% if msg == 'Failed to login!' %}
+        <div class="alert alert-danger" role="alert">
+            Failed to login!
+        </div>
+        {% endif %}
+
+        <label for="login-input">Login</label>
+        <input type="email" class="form-control" name="login-input" id="login-input" aria-describedby="email-label" placeholder="example@gmail.com" required>
+        <small id="email-label" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="password-input">Password</label>
+        <input type="password" class="form-control" name="password-input" id="password-input" placeholder="*********">
+        <small id="passwordHelpInline" class="text-muted">Must be 8-20 characters long.</small>
+      </div>
+      <div class="form-group">
+        <label for="password-confirm">Password Confirm</label>
+        <input type="password" class="form-control" name="password-confirm" id="password-confirm" placeholder="*********">
+        <small id="passwordConfirmHelpInline" class="text-muted">Password fields must match.</small>
+      </div>
+      <div class="form-row">
+          <div class="col-7">
+              <br/>
+          </div>
+          <div class="col-7">
+              <ul class="pagination">
+                <li class="page-item"><a class="btn btn-primary" href="/" role="button">Back</a></li>
+                <li class="page-item"><button type="submit" class="btn btn-success">Apply</button></li>
+              </ul>
+          </div>
+      </div>
+    </div>
+    </form>
+</body>
+</html>
