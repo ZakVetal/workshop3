@@ -1,0 +1,42 @@
+
+
+{% extends "index.html" %}
+
+{% block content %}
+
+
+
+ <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">User Name</th>
+                <th scope="col">Credit Card</th>
+                <th scope="col">Network Name</th>
+            </tr>
+        </thead>
+        <tr>
+        {% for user in users %}
+
+            <td> {{user.user_name }} </td>
+            <td> {{user.credit_card}} </td>
+            <td>
+                <ul>
+                    {% for network in user.orm_network %}
+                    <li>{{network.network_name}}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </td>
+
+
+
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+ </div>
+
+
+{% endblock %}
