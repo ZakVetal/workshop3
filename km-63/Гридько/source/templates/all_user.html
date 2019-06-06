@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+    <body>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>role</th>
+
+            </tr>
+            {% for item in result %}
+            <tr>
+                <td>{{ item.user_name }}</td>
+                <td>{{ item.role }}</td>
+
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
