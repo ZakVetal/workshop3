@@ -1,0 +1,58 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">file id</th>
+            <th scope="col">file name</th>
+            <th scope="col">file type</th>
+            <th scope="col">file context</th>
+            <th scope="col">file date</th>
+            <th scope="col">owner name</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for file in files%}
+        <tr>
+            <td> {{file.file_id}}</td>
+            <td> {{file.file_name}}</td>
+            <td> {{file.file_type}}</td>
+            <td> {{file.file_context}}</td>
+            <td> {{file.file_date}}</td>
+            {% if file.file_owner_id %}
+            <td> {{file.file_owner_name}}</td>
+            {% else %}
+            <td> None </td>
+            {% endif %}
+            <td>
+                <a href="/edit_file?file_id={{file.file_id}}" title="edit button">
+                    <button type="button" class="btn btn-warning" name="btn_edit_user"
+                            data-user_id="{{file.file_name}}">Edit
+                    </button>
+                </a>
+                <a href="/delete_file?file_id={{file.file_id}}" title="delete button">
+                    <button type="button" class="btn btn-danger" name="btn_delete_user"
+                            data-user_id="{{file.file_name}}">Delete
+                    </button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td>
+                <a href="/new_file" title="new file button">
+                    <button type="button" class="btn btn-success" name="btn_new_skill">New file</button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--<script src="{{ url_for('static', filename='js/skill.js') }}"></script>-->
+
+{% endblock %}

@@ -1,0 +1,114 @@
+
+
+{% extends "index.html" %}
+
+{% block content %}
+
+<!--https://www.codeply.com/go/nhbdi2FkJm-->
+
+
+<div class="col-md-6 mx-auto">
+
+    <!-- form card login -->
+    <div class="card rounded-0">
+
+        <div class="card-header">
+            <h3 class="mb-0">{{form_name}}</h3>
+        </div>
+        <div class="card-body">
+
+            <form class="form"  action = "/{{action}}" method = post >
+                {{ form.hidden_tag() }}
+
+
+                <div class="form-group">
+                    {{ form.file_name.label }}
+                    {{ form.file_name(class_="form-control") }}
+
+                    {% if form.file_name.errors%}
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in form.file_name.errors %}
+                        <div>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                    {%endif%}
+                </div>
+
+
+                <div class="form-group">
+                    {{ form.file_type.label }}
+                    {{ form.file_type(class_="form-control") }}
+
+                    {% if form.file_type.errors%}
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in form.file_type.errors %}
+                        <div>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                    {%endif%}
+                </div>
+
+                <div class="form-group">
+                    {{ form.file_context.label }}
+                    {{ form.file_context(class_="form-control") }}
+
+                    {% if form.file_context.errors%}
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in form.file_context.errors %}
+                        <div>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                    {%endif%}
+                </div>
+
+                {% if action != "edit_file" %}
+                <div class="form-group">
+                    {{ form.file_owner.label }}
+                    <select name="owner_select">
+                        <option value="None">None</option>
+                        {% for user in users %}
+                        <option value="{{user.user_name}}">{{user.user_name}}</option>
+                        {% endfor %}
+                    </select>
+
+                    {% if form.file_owner.errors%}
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in form.file_owner.errors %}
+                        <div>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                    {%endif%}
+                </div>
+                {% endif %}
+
+                <div class="form-group">
+                    {{ form.file_date.label }}
+                    {{ form.file_date(class_="form-control") }}
+
+
+                    {% if form.file_date.errors%}
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in form.file_date.errors %}
+                        <div>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                    {%endif%}
+                </div>
+
+
+
+                {{ form.submit(class_="btn btn-success") }}
+            </form>
+        </div>
+        <!--/card-block-->
+    </div>
+    <!-- /form card login -->
+
+</div>
+
+</div>
+
+
+
+
+{% endblock %}
