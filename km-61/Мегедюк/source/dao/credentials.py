@@ -1,0 +1,5 @@
+username='root'
+password='19061999'
+hostname='localhost'
+port='8088'
+database='KateProject'
