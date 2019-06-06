@@ -1,0 +1,5 @@
+username='projectno1'
+password='projectno1'
+host='localhost'
+port='1521'
+service='DB'
