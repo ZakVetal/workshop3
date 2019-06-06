@@ -1,0 +1,66 @@
+{% extends 'index.html' %}
+
+{% block title %} Attendance {% endblock title %}
+
+{% block extra_script %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/attendance.js') }}"></script>
+{% endblock extra_script %}
+
+{% block content %}
+    <br>
+    <div class="container">
+        <form id="attendance_form" method="post" action="/add_user_to_event">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="container">
+            Add user to event: &nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="user_id" class="selectpicker" data-live-search="true">
+                    {% for user in users %}
+                        <option data-tokens="ketchup mustard" value="{{ user.user_id }}">{{ user.user_first_name }}{{ user.user_last_name }}</option>
+                    {% endfor %}
+                </select>
+                &nbsp;&nbsp;&nbsp;
+                <select name="event_id" class="selectpicker" data-live-search="true">
+                    {% for event in events %}
+                        <option data-tokens="ketchup mustard" value="{{ event.event_id }}">{{ event.event_name }}</option>
+                    {% endfor %}
+                </select>
+                &nbsp;&nbsp;&nbsp;
+                <button type="submit" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
+            </div>
+        </form>
+    <br>
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Date</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+
+                    {% for attendance in attendances %}
+                        <tr>
+                            <td> {{attendance.event_name }} </td>
+                            <td> {{attendance.event_date}} </td>
+                            <td>
+                                <ul>
+                                    {% for user in attendance.orm_users %}
+                                    <li>{{user.user_first_name}} {{ user.user_last_name }}<a class="delete" onclick="del_user_from_event({{ user.user_id }}, {{ attendance.event_id }})" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                                    {% endfor %}
+                                </ul>
+                                <ul>
+
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/attendance.js') }}"></script>
+
+{% endblock content %}
