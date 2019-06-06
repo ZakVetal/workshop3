@@ -1,0 +1,5 @@
+username = 'mariam'
+password = 'test1311'
+host = 'localhost'
+port = '1521'
+service = 'XE'
