@@ -1,0 +1,40 @@
+
+{% extends "index.html" %}
+
+{% block content %}
+
+
+
+ <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Complaint</th>
+            </tr>
+        </thead>
+        <tr>
+        {% for user in users %}
+
+            <td> {{user.user_name }} </td>
+            <td> {{user.user_id}} </td>
+            <td>
+                <ul>
+                    {% for complaint_txt in user.orm_complaint %}
+                    <li>{{complaint.complaint_txt}}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </td>
+
+
+
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+ </div>
+
+
+{% endblock %}
